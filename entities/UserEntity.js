@@ -28,6 +28,13 @@ class UserEntity {
     UserEntity.data = newData;
     return;
   }
+
+  update(id, updatedUser) {
+    const index = UserEntity.data.findIndex((user) => user.id === id);
+    UserEntity.data[index] = updatedUser;
+
+    return UserEntity.data[index];
+  }
 }
 
 module.exports = new UserEntity();
