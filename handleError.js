@@ -6,8 +6,6 @@ module.exports = (error, _request, response, next) => {
 
   try {
     if (error instanceof HttpException) {
-      console.log('status: ', status);
-      console.log('message: ', message);
       return response.status(status).json({ message });
     }
   } catch (error) {

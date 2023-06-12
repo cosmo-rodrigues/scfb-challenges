@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (_req, res) {
-  res.send(`get user/ </br>
+  res.send(`get user/id </br>
   get users/ </br>
   post users/ </br>
   delete users/ </br>
@@ -29,7 +29,7 @@ app.get('/', function (_req, res) {
   `);
 });
 
-app.get('/user', teste1.getUser);
+app.get('/user/:id', teste1.getUser);
 app.get('/users', teste1.getUsers);
 app.post('/users', teste2.createUser);
 app.delete('/users', teste3);

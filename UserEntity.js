@@ -1,14 +1,14 @@
 const data = require('./fakeData');
 
-module.exports = class UserEntity {
+class UserEntity {
   static data = data;
 
-  name;
-  job;
+  getAll() {
+    return UserEntity.data;
+  }
 
-  constructor(name, job) {
-    this.name = name;
-    this.job = job;
+  getOne(id) {
+    return UserEntity.data.find((user) => user.id === id);
   }
 
   create(name, job) {
@@ -18,8 +18,13 @@ module.exports = class UserEntity {
       job,
     };
 
+    console.log('newUser: ', newUser);
     UserEntity.data.push(newUser);
 
-    return UserEntity.data;
+    console.log('Data: ', UserEntity.data);
+
+    return newUser;
   }
-};
+}
+
+module.exports = new UserEntity();
