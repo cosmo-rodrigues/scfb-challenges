@@ -1,3 +1,11 @@
+/**
+
+  Ao tentar remover um usuário tínhamos o mesmo problema de criar, pois a
+  busca pelo nome não é muito efetiva, ao não ser que seja um nick_name que
+  seja obrigatoriamente um valor único.
+
+ */
+
 const HttpException = require('./helper/httpException');
 const httpStatusCode = require('./constants/httpStatusCode');
 const UserEntity = require('./entities/UserEntity');

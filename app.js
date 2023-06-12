@@ -1,3 +1,14 @@
+/**
+
+  - Alterei o module.exports de todos os testes, para ficarem todo iguais
+  - Alterei 3 rotas, inserindo id nelas, para todas a busca mais assertiva
+  - Adicionei middleware de error para pegar todos os erros da aplicação e
+  garantir que não haverá interrupção na execução da api
+  - Inseri validações em todas as requisições, para garantir a integridade
+  dos dados
+
+ */
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
@@ -22,11 +33,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', function (_req, res) {
-  res.send(`get user/id </br>
+  res.send(`get users/id </br>
   get users/ </br>
   post users/ </br>
   delete users/ </br>
-  put users/ </br>
+  put users/id </br>
+  put users/access/id </br>
   `);
 });
 

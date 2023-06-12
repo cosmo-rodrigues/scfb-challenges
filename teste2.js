@@ -1,3 +1,15 @@
+/**
+
+  Neste desafio havia um erro de typo ao criar um novo usuário, o campo job estava
+  sendo salvo em uma variável chamada jov, causando um erro ao passar job como valor
+  para o objeto, pois ele não existia.
+
+  Outro problema aqui era na hora de salvar o novo usuário dentro de uma variável
+  que recebia os valores prévios do fakeData, pois esses dados existiram apenas
+  nesse ponto da aplicação, não persistindo para serem listados posteriormente
+
+ */
+
 const HttpException = require('./helper/httpException');
 const httpStatusCode = require('./constants/httpStatusCode');
 const UserEntity = require('./entities/UserEntity');

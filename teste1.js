@@ -1,3 +1,17 @@
+/**
+
+  Este método fazia busca por usuário utilizando o nome dele como parâmetro
+  de query, no entanto esse é um tipo de busca que não é muito eficiente,
+  pois nome não é valor do tipo único em uma tabela, então haveriam vários
+  resultados possíveis, e isso acabaria retornando um usuário, que talvez não
+  fosse o esperado.
+
+  Mudei a busca por ID como parâmetro da url, pois traz exatamente o usuário
+  buscado. Outra abordagem seria inserir mais um campo no usuário, algo que
+  fosse único, como um email, ou cpf.
+
+ */
+
 const HttpException = require('./helper/httpException');
 const httpStatusCode = require('./constants/httpStatusCode');
 const UserEntity = require('./entities/UserEntity');
