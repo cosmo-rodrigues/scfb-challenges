@@ -1,9 +1,29 @@
+const HttpException = require('./helper/httpException');
+const httpStatusCode = require('./constants/httpStatusCode');
+const UserEntity = require('./entities/UserEntity');
+const userValidations = require('./validations/userValidations');
 
+const getUserAccessCount = (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    userValidations.userId(userId);
+    const user = UserEntity.getOne(+userId);
 
-module.exports = function(req, res){
-    
-    var name =  req.query.name;
+    if (!user) {
+      throw new HttpException(
+        httpStatusCode.NOT_FOUND,
+        'Usuário não encontrado'
+      );
+    }
 
-    res.send("Usuário " +  name  + "  foi lido 0 vezes.");
+    res.status(httpStatusCode.OK).json({
+      message: `O usuário ${user.name} foi lido ${user.count} vezes.`,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
 
+module.exports = {
+  getUserAccessCount,
 };

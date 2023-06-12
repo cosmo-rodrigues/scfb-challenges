@@ -16,6 +16,7 @@ class UserEntity {
       id: UserEntity.data.length + 1,
       name,
       job,
+      count: 0,
     };
 
     UserEntity.data.push(newUser);

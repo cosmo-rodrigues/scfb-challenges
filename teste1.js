@@ -15,6 +15,11 @@ const getUser = (req, res, next) => {
         'Usuário não encontrado'
       );
     }
+    if (!user.count) {
+      user.count = 1;
+    } else {
+      user.count++;
+    }
 
     res.status(httpStatusCode.OK).json({ user });
   } catch (error) {
