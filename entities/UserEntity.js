@@ -1,4 +1,4 @@
-const data = require('./fakeData');
+const data = require('../fakeData');
 
 class UserEntity {
   static data = data;
