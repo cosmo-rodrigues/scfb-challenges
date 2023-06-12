@@ -17,7 +17,7 @@ const getUserAccessCount = (req, res, next) => {
     }
 
     res.status(httpStatusCode.OK).json({
-      message: `O usuário ${user.name} foi lido ${user.count} vezes.`,
+      message: `O usuário ${user.name} foi lido ${user.profileViews} vezes.`,
     });
   } catch (error) {
     next(error);

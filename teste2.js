@@ -1,6 +1,7 @@
 const HttpException = require('./helper/httpException');
 const httpStatusCode = require('./constants/httpStatusCode');
 const UserEntity = require('./entities/UserEntity');
+const roleInjection = require('./helper/roleInjection');
 const userValidations = require('./validations/userValidations');
 
 const createUser = (req, res, next) => {
@@ -23,7 +24,9 @@ const createUser = (req, res, next) => {
     }
 
     userValidations.userInfo(name, job);
-    const createdUser = UserEntity.create(name, job);
+
+    const role = roleInjection(job);
+    const createdUser = UserEntity.create(name, job, role);
 
     res.status(httpStatusCode.CREATED).json({ user: createdUser });
   } catch (error) {

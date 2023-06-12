@@ -11,12 +11,13 @@ class UserEntity {
     return UserEntity.data.find((user) => user.id === id);
   }
 
-  create(name, job) {
+  create(name, job, role) {
     const newUser = {
       id: UserEntity.data.length + 1,
-      name,
       job,
-      count: 0,
+      name,
+      profileViews: 0,
+      role,
     };
 
     UserEntity.data.push(newUser);
