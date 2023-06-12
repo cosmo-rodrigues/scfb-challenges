@@ -1,44 +1,28 @@
-const UserEntity = require('./UserEntity');
-const userValidations = require('./userValidations');
-const httpStatusCode = require('./httpStatusCode');
-const HttpException = require('./httpException');
-
-const createUser = (req, res, next) => {
-  try {
-    const name = req.body.name;
-    const job = req.body.job;
-
-    userValidations.userInfo(name, job);
-    const newUser = new UserEntity();
-    const createdUser = newUser.create(name, job);
-
-    res.status(httpStatusCode.CREATED).json({ user: createdUser });
-  } catch (error) {
-    next(error);
-  }
-};
+const HttpException = require('./helper/httpException');
+const httpStatusCode = require('./constants/httpStatusCode');
+const UserEntity = require('./entities/UserEntity');
+const userValidations = require('./validations/userValidations');
 
 const getUser = (req, res, next) => {
   try {
     const userId = req.params.id;
-    if (!userId || isNaN(userId))
-      throw new HttpException(400, 'O ID do usuário é um número obrigatório');
+    userValidations.userId(userId);
+    const user = UserEntity.getOne(+userId);
 
-    let user = UserEntity.getOne(+userId);
-
-    if (user) {
-      res.status(httpStatusCode.OK).json({ user });
-    } else {
-      res
-        .status(httpStatusCode.NOT_FOUND)
-        .json({ message: 'Usuário não encontrado' });
+    if (!user) {
+      throw new HttpException(
+        httpStatusCode.NOT_FOUND,
+        'Usuário não encontrado'
+      );
     }
+
+    res.status(httpStatusCode.OK).json({ user });
   } catch (error) {
     next(error);
   }
 };
 
-const getUsers = (req, res, next) => {
+const getUsers = (_req, res, next) => {
   try {
     const users = UserEntity.getAll();
     res.status(httpStatusCode.OK).json({ users });
@@ -48,7 +32,6 @@ const getUsers = (req, res, next) => {
 };
 
 module.exports = {
-  createUser,
   getUser,
   getUsers,
 };

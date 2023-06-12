@@ -22,6 +22,12 @@ class UserEntity {
 
     return newUser;
   }
+
+  delete(id) {
+    const newData = UserEntity.data.filter((user) => user.id !== id);
+    UserEntity.data = newData;
+    return;
+  }
 }
 
 module.exports = new UserEntity();

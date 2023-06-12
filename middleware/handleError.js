@@ -1,4 +1,4 @@
-const HttpException = require('./httpException');
+const HttpException = require('../helper/httpException');
 const httpStatusCode = require('../constants/httpStatusCode');
 
 module.exports = (error, _request, response, next) => {

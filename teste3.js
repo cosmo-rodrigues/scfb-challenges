@@ -1,15 +1,28 @@
-var data =  require("./fakeData");
+const HttpException = require('./helper/httpException');
+const httpStatusCode = require('./constants/httpStatusCode');
+const UserEntity = require('./entities/UserEntity');
+const userValidations = require('./validations/userValidations');
 
-module.exports = function(req, res) {
-  
-    var name =  req.query.name;
+const deleteUser = (req, res, next) => {
+  try {
+    const userId = req.body.id;
+    userValidations.userId(userId);
+    const user = UserEntity.getOne(+userId);
 
-    for(let i = 0; i < data.length;  i++) {
-        if(i.name == name) {
-            data[i] = null;
-        }
+    if (!user) {
+      throw new HttpException(
+        httpStatusCode.NOT_FOUND,
+        'Usuário não encontrado'
+      );
     }
+    UserEntity.delete(userId);
 
-    res.send("success");
+    return res.send(httpStatusCode.NO_CONTENT);
+  } catch (error) {
+    next(error);
+  }
+};
 
+module.exports = {
+  deleteUser,
 };

@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-const handleError = require('./handleError');
+const handleError = require('./middleware/handleError');
 
 var teste1 = require('./teste1');
 var teste2 = require('./teste2');
@@ -32,7 +32,7 @@ app.get('/', function (_req, res) {
 app.get('/user/:id', teste1.getUser);
 app.get('/users', teste1.getUsers);
 app.post('/users', teste2.createUser);
-app.delete('/users', teste3);
+app.delete('/users', teste3.deleteUser);
 app.put('/users', teste4);
 app.get('/users/access', teste5);
 app.use(handleError);
