@@ -18,10 +18,7 @@ class UserEntity {
       job,
     };
 
-    console.log('newUser: ', newUser);
     UserEntity.data.push(newUser);
-
-    console.log('Data: ', UserEntity.data);
 
     return newUser;
   }
